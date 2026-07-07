@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — Perriann Diaz Artisan</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="announce">Next shop update <strong>July 16</strong> — patrons get early access &amp; a discount code. <a href="index.html#newsletter">Become a patron</a></div>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html">perriann <em>diaz</em></a>
+    <nav class="main">
+      <a href="shop.html" class="active">Shop</a>
+      <a href="index.html#scents">Signature Scents</a>
+      <a href="ceramics.html">Ceramics</a>
+      <a href="index.html#story">Our Story</a>
+      <a href="pledge.html">No-Plastic Pledge</a>
+      <a href="index.html#stockists">Find Us in Stores</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="cart-pill" href="#">Cart · 0</a>
+    </div>
+  </div>
+</header>
+
+<div class="shop-head">
+  <div class="wrap">
+    <span class="kicker">The artisan shop</span>
+    <h1>Small batches, made by hand.</h1>
+    <p>Because everything is created by hand in small runs, each piece is unique — and quantities are honest. When a batch sells out, it comes back with the next shop update.</p>
+  </div>
+</div>
+
+<div class="wrap filter-bar" id="filters">
+  <button class="chip active" data-group="all">Everything</button>
+  <button class="chip" data-group="candles">Candles</button>
+  <button class="chip" data-group="soap">Cold Process Soap</button>
+  <button class="chip" data-group="room-spray">Room Sprays</button>
+  <button class="chip" data-group="tissue">Tissue Paper</button>
+  <button class="chip" data-group="merch">Merch</button>
+  <button class="chip" data-group="in-stock">In stock only</button>
+  <span class="result-note" id="count"></span>
+</div>
+
+<div class="wrap" style="padding-bottom: 90px;">
+  <div class="prod-grid" id="grid"></div>
+</div>
+
+<footer class="site" style="margin-top:0;">
+  <div class="wrap foot-base" style="border-top:none;">
+    <span>© 2026 Perriann Diaz Artisan</span>
+    <a href="index.html">← Back to home</a>
+  </div>
+</footer>
+
+<script src="catalog.js"></script>
+<script>
+const groupLabel = { candles: 'candle', soap: 'cold process soap', 'room-spray': 'room spray', tissue: 'tissue paper', merch: 'merch' };
+const grid = document.getElementById('grid');
+const count = document.getElementById('count');
+
+function card(p) {
+  let badge = '';
+  if (p.stock === 0) badge = '<span class="badge out">Sold out</span>';
+  else if (p.stock > 0 && p.stock <= 3) badge = `<span class="badge low">Only ${p.stock} left</span>`;
+  const price = p.price === p.priceMax ? `$${p.price.toFixed(2)}` : `from $${p.price.toFixed(2)}`;
+  return `<div class="prod-card ${p.stock === 0 ? 'is-out' : ''}">
+    <div class="ph">${badge}<img loading="lazy" src="assets/${p.slug}.jpg" alt="${p.title}">
+    ${p.stock !== 0 ? '<button class="quick-add" aria-label="Add to cart">+</button>' : ''}</div>
+    <div class="name">${p.title}</div>
+    <div class="meta"><span class="type">${groupLabel[p.group] || ''}</span><span class="price">${price}</span></div>
+  </div>`;
+}
+
+// sort: in-stock first, then by group order
+const order = ['candles','soap','room-spray','tissue','merch'];
+const sorted = [...CATALOG].sort((a,b) =>
+  (b.stock !== 0) - (a.stock !== 0) || order.indexOf(a.group) - order.indexOf(b.group) || a.title.localeCompare(b.title));
+
+function render(group) {
+  let items = sorted;
+  if (group === 'in-stock') items = items.filter(p => p.stock !== 0);
+  else if (group !== 'all') items = items.filter(p => p.group === group);
+  grid.innerHTML = items.map(card).join('');
+  count.textContent = `${items.length} of ${CATALOG.length} pieces`;
+}
+
+document.getElementById('filters').addEventListener('click', e => {
+  const chip = e.target.closest('.chip'); if (!chip) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  render(chip.dataset.group);
+});
+
+// support #candles etc. deep links
+const hash = location.hash.replace('#','');
+const initial = ['candles','soap','room-spray','tissue','merch'].includes(hash) ? hash : 'all';
+document.querySelector(`.chip[data-group="${initial}"]`)?.classList.add('active');
+if (initial !== 'all') document.querySelector('.chip[data-group="all"]').classList.remove('active');
+render(initial);
+</script>
+</body>
+</html>

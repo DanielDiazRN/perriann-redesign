@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ceramics Studio — Commissions by Perriann Diaz</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="gallery">
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html">perriann <em>diaz</em></a>
+    <nav class="main">
+      <a href="shop.html">Shop</a>
+      <a href="index.html#scents">Signature Scents</a>
+      <a href="ceramics.html" class="active">Ceramics</a>
+      <a href="index.html#story">Our Story</a>
+      <a href="pledge.html">No-Plastic Pledge</a>
+      <a href="index.html#stockists">Find Us in Stores</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="cart-pill" href="#">Cart · 0</a>
+    </div>
+  </div>
+</header>
+
+<section class="g-cinema">
+  <img src="assets/ceramics/3-ring-teapots-3.jpg" alt="Three-ring teapots, thrown and joined by hand" style="object-position: 50% 58%;">
+  <div class="veil"></div>
+  <div class="cine-copy">
+    <div class="wrap">
+      <span class="kicker g-kicker">The ceramics studio · by commission</span>
+      <h1>Thrown once. <em>Yours</em> forever.</h1>
+      <p class="sub">One-of-one dinnerware, vases, and sculptural pieces — designed for your space, shaped by hand.</p>
+      <a class="scroll-cue" href="#work">View the collection ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="wall-head" id="work">
+  <span class="kicker g-kicker">Selected work</span>
+  <p>Hover a piece for its name · click to look closer</p>
+</div>
+
+<div class="wall" id="wall"></div>
+
+<section class="commission" id="commission">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Commissioning a piece</h2>
+        <p>Most commissions are sets — dinnerware for eight, a run of vases, a tablescape for a new home.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="k">01</span><b>The conversation</b><p>Photos of your space, your palette, how you'll live with the pieces.</p></div>
+      <div class="step"><span class="k">02</span><b>Form &amp; glaze</b><p>Sketched forms and fired glaze tiles, approved before throwing begins.</p></div>
+      <div class="step"><span class="k">03</span><b>The making</b><p>Thrown, carved, glazed, and fired in-house, as a single family.</p></div>
+      <div class="step"><span class="k">04</span><b>Delivery</b><p>Hand-packed without plastic; insured to your door.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="g-cta">
+  <div class="wrap">
+    <span class="kicker g-kicker" style="justify-content:center; display:inline-flex;">Limited commissions per season</span>
+    <h2>Your table. Her wheel.</h2>
+    <p>Every piece is made by one pair of hands, so only a few commissions are taken each season. Projects are quoted individually.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a class="btn light" href="mailto:perrianndiaz@outlook.com?subject=Ceramics commission inquiry">Commission Your Own Piece →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-base">
+    <span>© 2026 Perriann Diaz Artisan</span>
+    <a href="index.html">← Back to home</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Piece detail">
+  <div class="lb-backdrop" id="lb-backdrop"></div>
+  <div class="lb-card">
+    <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+    <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+    <div class="lb-side">
+      <span class="k">One of one</span>
+      <h3 id="lb-title"></h3>
+      <div class="rule"></div>
+      <p id="lb-line"></p>
+      <div><a class="btn light" id="lb-cta" href="#commission">Commission Your Own Piece</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Composed 4-column wall, 10 rows. size: 'big' = 2x2, 'tall' = 1x2, default 1x1.
+// at: [column, row] — explicit placement so no row ever holds two signature pieces
+// or four singles; the tall slots carry the six flower vases uncropped.
+const PIECES = [
+  // rows 1-2
+  { f: 'assets/ceramics/3-ring-teapot-chalkboard-black-05-2.jpg', t: 'the three-ring teapot', l: 'Three interlocking thrown rings that fill, steep, and pour — we have never seen another anywhere.', size: 'big', at: [1, 1], pos: '50% 72%' },
+  { f: 'assets/ceramics/vase-blue-and-white-8.jpg', t: 'vase, storm blue', l: 'Thrown tall to carry a full bouquet.', size: 'tall', at: [3, 1] },
+  { f: 'assets/ceramics/sushi-dish-with-dipping-cup-1.jpg', t: 'sushi dish', l: 'The dipping cup is thrown into the plate itself, so the soy never wanders.', at: [4, 1] },
+  { f: 'assets/ceramics/tea-bowls-3.jpg', t: 'tea bowl, lagoon', l: 'Its pour spout was pinched while the clay was still soft.', at: [4, 2] },
+  // rows 3-4
+  { f: 'assets/ceramics/carved-vase-3-2.jpg', t: 'carved vase, sandstone', l: 'Freehand carving under a flame-blend glaze.', size: 'tall', at: [1, 3] },
+  { f: 'assets/ceramics/cup-and-saucer-calico-10.jpg', t: 'cup & saucer, calico', l: 'Speckled slip under a soft satin glaze.', at: [2, 3] },
+  { f: 'assets/ceramics/coffee-pour-over-2.jpg', t: 'pour-over, sea glass', l: 'A morning ritual, thrown to fit a standard filter.', at: [2, 4] },
+  { f: 'assets/hero-ramen-bowls.jpg', t: 'ramen bowls', l: 'A slot thrown into the rim holds the chopsticks above the broth.', size: 'big', at: [3, 3] },
+  // rows 5-6
+  { f: 'assets/ceramics/tapas-plates-with-ridges-5.jpg', t: 'tapas plates, verdigris', l: 'Ridged and glazed like sea-worn copper.', at: [1, 5] },
+  { f: 'assets/ceramics/carved-vase-04-1.jpg', t: 'carved vase, celadon', l: 'Celadon dipped over hand-cut relief.', size: 'tall', at: [2, 5] },
+  { f: 'assets/ceramics/carved-plates-05-2.jpg', t: 'carved serving bowls', l: 'Fluted walls, cut line by line before the first firing.', at: [3, 5] },
+  { f: 'assets/ceramics/mini-bowls-05-3.jpg', t: 'mini bowls', l: 'A family of glazes, one bowl at a time.', at: [4, 5] },
+  { f: 'assets/ceramics/shino-plates-03-3.jpg', t: 'shino plates', l: 'A warm shino glaze breaking over the rim.', at: [1, 6] },
+  { f: 'assets/ceramics/alabaster-cups-2.jpg', t: 'alabaster cups', l: 'Unhandled tumblers in a stone-soft matte.', at: [3, 6] },
+  { f: 'assets/ceramics/img-1557.jpg', t: 'matcha bowl', l: 'Glazed half in ink, half in cream.', at: [4, 6] },
+  // rows 7-8 — the monument row
+  { f: 'assets/ceramics/2020-pda-c2020-growler-02-5.jpg', t: 'growler, birch', l: 'Wood-grain carving, cut ring by ring.', size: 'tall', at: [1, 7] },
+  { f: 'assets/ceramics/topo-growler-05-1.jpg', t: 'the topographic growler', l: 'A contour map carved freehand around the body — commission one mapped to a place you love.', size: 'big', at: [2, 7] },
+  { f: 'assets/ceramics/vases-05-1.jpg', t: 'bud vases, oxblood', l: 'A matched pair in a copper-red reduction glaze.', size: 'tall', at: [4, 7] },
+  // rows 9-10
+  { f: 'assets/ceramics/img-9295.jpg', t: 'stacking plates', l: 'Thrown to nest, glazed to match.', at: [1, 9] },
+  { f: 'assets/ceramics/carved-vase-2-6.jpg', t: 'carved vase, bone white', l: 'Geometric relief, cut petal by petal.', size: 'tall', at: [2, 9] },
+  { f: 'assets/ceramics/berry-collandar-1.jpg', t: 'berry colander', l: 'Pierced by hand, for rinsing straight to the table.', at: [3, 9] },
+  { f: 'assets/ceramics/red-ring-dishes-05-1.jpg', t: 'ring dishes, cherry', l: 'Nightstand-sized, glazed like fruit.', at: [4, 9] },
+  { f: 'assets/ceramics/2020-pda-c2020-plate-red-wine-2.jpg', t: 'plate, red wine', l: 'A gloss the color of a poured cabernet.', at: [1, 10] },
+  { f: 'assets/ceramics/lily-white-04-4.jpg', t: 'nesting bowls, lily white', l: 'Thrown as a set, sized to stack.', at: [3, 10] },
+  { f: 'assets/ceramics/match-striker-3.jpg', t: 'match striker', l: 'Unglazed grit on the shoulder strikes the match.', at: [4, 10] },
+];
+
+const SPAN = { big: [2, 2], tall: [1, 2] };
+const wall = document.getElementById('wall');
+wall.innerHTML = PIECES.map((p, i) => {
+  const [cs, rs] = SPAN[p.size] || [1, 1];
+  return `
+  <button class="tile reveal ${p.size || ''}" data-i="${i}" aria-label="${p.t}"
+    style="grid-column: ${p.at[0]} / span ${cs}; grid-row: ${p.at[1]} / span ${rs};">
+    <img loading="lazy" src="${p.f}" alt="${p.t}" ${p.pos ? `style="object-position:${p.pos}"` : ''}>
+    <span class="t-title">${p.t}</span>
+  </button>`;
+}).join('');
+
+// scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 70}ms`; io.observe(el); });
+
+// lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbTitle = document.getElementById('lb-title');
+const lbLine = document.getElementById('lb-line');
+
+function openLb(i) {
+  const p = PIECES[i];
+  lbImg.src = p.f;
+  lbImg.alt = p.t;
+  lbTitle.textContent = p.t;
+  lbLine.textContent = p.l;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lb-close').focus();
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+wall.addEventListener('click', e => {
+  const t = e.target.closest('.tile');
+  if (t) openLb(+t.dataset.i);
+});
+document.getElementById('lb-close').addEventListener('click', closeLb);
+document.getElementById('lb-backdrop').addEventListener('click', closeLb);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+const jump = y => window.scrollTo({ top: y, behavior: 'instant' });
+function glideTo(targetY, ms = 900) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { jump(targetY); return; }
+  const startY = window.scrollY, delta = targetY - startY, t0 = performance.now();
+  const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  (function frame(now) {
+    const p = Math.min((now - t0) / ms, 1);
+    jump(startY + delta * ease(p));
+    if (p < 1) requestAnimationFrame(frame);
+  })(t0);
+  setTimeout(() => { if (Math.abs(window.scrollY - targetY) > Math.abs(delta) * .8) jump(targetY); }, 300);
+}
+document.getElementById('lb-cta').addEventListener('click', e => {
+  e.preventDefault();
+  closeLb();
+  glideTo(document.getElementById('commission').getBoundingClientRect().top + window.scrollY - 40);
+});
+</script>
+</body>
+</html>
