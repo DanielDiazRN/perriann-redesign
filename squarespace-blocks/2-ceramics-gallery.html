@@ -1,0 +1,242 @@
+<!-- ===== PERRIANN DIAZ · CERAMICS GALLERY + LIGHTBOX =====
+     Paste the WHOLE thing into a Squarespace Code Block.
+     If the pop-up (lightbox) doesn't open, move the <script>...</script> at the
+     bottom into  Settings > Advanced > Code Injection > FOOTER  instead.
+     The "Commission" button scrolls to a section whose ID is  pda-commission
+     (set that as your commission section's Anchor/Block ID), else opens email.
+     Swap image URLs for Squarespace-hosted versions before launch. -->
+<div class="pda-cw">
+  <style>
+    .pda-cw{background:#16120F;margin:0 -17px;padding:6px 5px 5px;
+      font-family:'Poppins',-apple-system,sans-serif;}
+    .pda-cw .pda-wall{display:grid;grid-template-columns:repeat(4,1fr);
+      grid-auto-rows:23vw;gap:5px;max-width:1500px;margin:0 auto;}
+    .pda-tile{position:relative;overflow:hidden;cursor:pointer;border:none;padding:0;
+      background:#1E1813;border-radius:0;}
+    .pda-tile.pda-big{grid-column:span 2;grid-row:span 2;}
+    .pda-tile.pda-tall{grid-row:span 2;}
+    .pda-tile img{width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .8s cubic-bezier(.2,.6,.2,1);}
+    .pda-tile:hover img,.pda-tile:focus-visible img{transform:scale(1.055);}
+    .pda-tt{position:absolute;inset:0;display:grid;place-items:center;padding:0 20px;
+      background:rgba(14,11,9,.52);opacity:0;transition:opacity .35s;
+      font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(16px,1.7vw,25px);
+      color:#F5EFE6;text-align:center;}
+    .pda-tile:hover .pda-tt,.pda-tile:focus-visible .pda-tt{opacity:1;}
+    .pda-tile:focus-visible{outline:2px solid #8FD3B5;outline-offset:-2px;}
+    @media(max-width:960px){
+      .pda-cw .pda-wall{grid-template-columns:repeat(2,1fr);grid-auto-rows:44vw;}
+      .pda-tile{grid-area:auto !important;}
+      .pda-tile.pda-big{grid-column:span 2 !important;grid-row:span 2 !important;}
+      .pda-tile.pda-tall{grid-row:span 2 !important;}
+    }
+    /* lightbox */
+    .pda-lb{position:fixed;inset:0;z-index:9999;display:none;}
+    .pda-lb.pda-open{display:block;}
+    .pda-lb-bg{position:absolute;inset:0;background:rgba(10,8,6,.9);}
+    .pda-lb-card{position:absolute;inset:0;margin:auto;
+      width:min(1040px,calc(100% - 28px));height:min(650px,calc(100% - 44px));
+      background:#16120F;border:1px solid #33291F;border-radius:14px;overflow:hidden;
+      display:grid;grid-template-columns:1.4fr 1fr;box-shadow:0 80px 160px -40px rgba(0,0,0,.95);}
+    .pda-lb-card img{width:100%;height:100%;object-fit:contain;background:#0C0A08;}
+    .pda-lb-side{padding:46px 42px;display:flex;flex-direction:column;justify-content:center;}
+    .pda-lb-side .pda-k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+      color:#8FD3B5;font-weight:600;margin-bottom:16px;}
+    .pda-lb-side h3{font-family:'Fraunces',Georgia,serif;font-weight:450;
+      font-size:clamp(23px,2.5vw,32px);color:#F5EFE6;line-height:1.1;margin:0 0 16px;}
+    .pda-lb-side .pda-rule{width:56px;height:1px;background:#3D3227;margin-bottom:16px;}
+    .pda-lb-side p{color:#B4A695;font-size:15.5px;margin:0 0 30px;}
+    .pda-lb-cta{display:inline-block;background:#F5EFE6;color:#16120F;text-decoration:none;
+      padding:13px 26px;border-radius:99px;font-weight:500;font-size:14.5px;
+      font-family:'Poppins',sans-serif;}
+    .pda-lb-close{position:absolute;top:14px;right:14px;width:42px;height:42px;z-index:2;
+      border-radius:50%;border:1px solid #4A3D33;background:rgba(22,18,15,.7);color:#EDE6DC;
+      font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;}
+    .pda-lb-close:hover{background:#EDE6DC;color:#16120F;}
+    @media(max-width:760px){
+      .pda-lb-card{grid-template-columns:1fr;grid-template-rows:auto 1fr;
+        height:min(760px,calc(100% - 44px));overflow-y:auto;}
+      .pda-lb-card img{max-height:40vh;}
+      .pda-lb-side{padding:26px 26px 34px;justify-content:flex-start;}
+    }
+  </style>
+
+  <div class="pda-wall">
+    <button class="pda-tile pda-big" style="grid-column:1/span 2;grid-row:1/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/3-ring-teapot-chalkboard-black-05-2.jpg" data-title="the three-ring teapot" data-line="Three interlocking thrown rings that fill, steep, and pour — we have never seen another anywhere." aria-label="the three-ring teapot">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/3-ring-teapot-chalkboard-black-05-2.jpg" alt="the three-ring teapot" style="object-position:50% 72%">
+      <span class="pda-tt">the three-ring teapot</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:3/span 1;grid-row:1/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/vase-blue-and-white-8.jpg" data-title="vase, storm blue" data-line="Thrown tall to carry a full bouquet." aria-label="vase, storm blue">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/vase-blue-and-white-8.jpg" alt="vase, storm blue">
+      <span class="pda-tt">vase, storm blue</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:1/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/sushi-dish-with-dipping-cup-1.jpg" data-title="sushi dish" data-line="The dipping cup is thrown into the plate itself, so the soy never wanders." aria-label="sushi dish">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/sushi-dish-with-dipping-cup-1.jpg" alt="sushi dish">
+      <span class="pda-tt">sushi dish</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:2/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/tea-bowls-3.jpg" data-title="tea bowl, lagoon" data-line="Its pour spout was pinched while the clay was still soft." aria-label="tea bowl, lagoon">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/tea-bowls-3.jpg" alt="tea bowl, lagoon">
+      <span class="pda-tt">tea bowl, lagoon</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:1/span 1;grid-row:3/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-3-2.jpg" data-title="carved vase, sandstone" data-line="Freehand carving under a flame-blend glaze." aria-label="carved vase, sandstone">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-3-2.jpg" alt="carved vase, sandstone">
+      <span class="pda-tt">carved vase, sandstone</span>
+    </button>
+    <button class="pda-tile" style="grid-column:2/span 1;grid-row:3/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/cup-and-saucer-calico-10.jpg" data-title="cup &amp; saucer, calico" data-line="Speckled slip under a soft satin glaze." aria-label="cup &amp; saucer, calico">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/cup-and-saucer-calico-10.jpg" alt="cup &amp; saucer, calico">
+      <span class="pda-tt">cup &amp; saucer, calico</span>
+    </button>
+    <button class="pda-tile" style="grid-column:2/span 1;grid-row:4/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/coffee-pour-over-2.jpg" data-title="pour-over, sea glass" data-line="A morning ritual, thrown to fit a standard filter." aria-label="pour-over, sea glass">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/coffee-pour-over-2.jpg" alt="pour-over, sea glass">
+      <span class="pda-tt">pour-over, sea glass</span>
+    </button>
+    <button class="pda-tile pda-big" style="grid-column:3/span 2;grid-row:3/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/hero-ramen-bowls.jpg" data-title="ramen bowls" data-line="A slot thrown into the rim holds the chopsticks above the broth." aria-label="ramen bowls">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/hero-ramen-bowls.jpg" alt="ramen bowls">
+      <span class="pda-tt">ramen bowls</span>
+    </button>
+    <button class="pda-tile" style="grid-column:1/span 1;grid-row:5/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/tapas-plates-with-ridges-5.jpg" data-title="tapas plates, verdigris" data-line="Ridged and glazed like sea-worn copper." aria-label="tapas plates, verdigris">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/tapas-plates-with-ridges-5.jpg" alt="tapas plates, verdigris">
+      <span class="pda-tt">tapas plates, verdigris</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:2/span 1;grid-row:5/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-04-1.jpg" data-title="carved vase, celadon" data-line="Celadon dipped over hand-cut relief." aria-label="carved vase, celadon">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-04-1.jpg" alt="carved vase, celadon">
+      <span class="pda-tt">carved vase, celadon</span>
+    </button>
+    <button class="pda-tile" style="grid-column:3/span 1;grid-row:5/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-plates-05-2.jpg" data-title="carved serving bowls" data-line="Fluted walls, cut line by line before the first firing." aria-label="carved serving bowls">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-plates-05-2.jpg" alt="carved serving bowls">
+      <span class="pda-tt">carved serving bowls</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:5/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/mini-bowls-05-3.jpg" data-title="mini bowls" data-line="A family of glazes, one bowl at a time." aria-label="mini bowls">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/mini-bowls-05-3.jpg" alt="mini bowls">
+      <span class="pda-tt">mini bowls</span>
+    </button>
+    <button class="pda-tile" style="grid-column:1/span 1;grid-row:6/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/shino-plates-03-3.jpg" data-title="shino plates" data-line="A warm shino glaze breaking over the rim." aria-label="shino plates">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/shino-plates-03-3.jpg" alt="shino plates">
+      <span class="pda-tt">shino plates</span>
+    </button>
+    <button class="pda-tile" style="grid-column:3/span 1;grid-row:6/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/alabaster-cups-2.jpg" data-title="alabaster cups" data-line="Unhandled tumblers in a stone-soft matte." aria-label="alabaster cups">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/alabaster-cups-2.jpg" alt="alabaster cups">
+      <span class="pda-tt">alabaster cups</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:6/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/img-1557.jpg" data-title="matcha bowl" data-line="Glazed half in ink, half in cream." aria-label="matcha bowl">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/img-1557.jpg" alt="matcha bowl">
+      <span class="pda-tt">matcha bowl</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:1/span 1;grid-row:7/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/2020-pda-c2020-growler-02-5.jpg" data-title="growler, birch" data-line="Wood-grain carving, cut ring by ring." aria-label="growler, birch">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/2020-pda-c2020-growler-02-5.jpg" alt="growler, birch">
+      <span class="pda-tt">growler, birch</span>
+    </button>
+    <button class="pda-tile pda-big" style="grid-column:2/span 2;grid-row:7/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/topo-growler-05-1.jpg" data-title="the topographic growler" data-line="A contour map carved freehand around the body — commission one mapped to a place you love." aria-label="the topographic growler">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/topo-growler-05-1.jpg" alt="the topographic growler">
+      <span class="pda-tt">the topographic growler</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:4/span 1;grid-row:7/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/vases-05-1.jpg" data-title="bud vases, oxblood" data-line="A matched pair in a copper-red reduction glaze." aria-label="bud vases, oxblood">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/vases-05-1.jpg" alt="bud vases, oxblood">
+      <span class="pda-tt">bud vases, oxblood</span>
+    </button>
+    <button class="pda-tile" style="grid-column:1/span 1;grid-row:9/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/img-9295.jpg" data-title="stacking plates" data-line="Thrown to nest, glazed to match." aria-label="stacking plates">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/img-9295.jpg" alt="stacking plates">
+      <span class="pda-tt">stacking plates</span>
+    </button>
+    <button class="pda-tile pda-tall" style="grid-column:2/span 1;grid-row:9/span 2;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-2-6.jpg" data-title="carved vase, bone white" data-line="Geometric relief, cut petal by petal." aria-label="carved vase, bone white">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/carved-vase-2-6.jpg" alt="carved vase, bone white">
+      <span class="pda-tt">carved vase, bone white</span>
+    </button>
+    <button class="pda-tile" style="grid-column:3/span 1;grid-row:9/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/berry-collandar-1.jpg" data-title="berry colander" data-line="Pierced by hand, for rinsing straight to the table." aria-label="berry colander">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/berry-collandar-1.jpg" alt="berry colander">
+      <span class="pda-tt">berry colander</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:9/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/red-ring-dishes-05-1.jpg" data-title="ring dishes, cherry" data-line="Nightstand-sized, glazed like fruit." aria-label="ring dishes, cherry">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/red-ring-dishes-05-1.jpg" alt="ring dishes, cherry">
+      <span class="pda-tt">ring dishes, cherry</span>
+    </button>
+    <button class="pda-tile" style="grid-column:1/span 1;grid-row:10/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/2020-pda-c2020-plate-red-wine-2.jpg" data-title="plate, red wine" data-line="A gloss the color of a poured cabernet." aria-label="plate, red wine">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/2020-pda-c2020-plate-red-wine-2.jpg" alt="plate, red wine">
+      <span class="pda-tt">plate, red wine</span>
+    </button>
+    <button class="pda-tile" style="grid-column:3/span 1;grid-row:10/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/lily-white-04-4.jpg" data-title="nesting bowls, lily white" data-line="Thrown as a set, sized to stack." aria-label="nesting bowls, lily white">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/lily-white-04-4.jpg" alt="nesting bowls, lily white">
+      <span class="pda-tt">nesting bowls, lily white</span>
+    </button>
+    <button class="pda-tile" style="grid-column:4/span 1;grid-row:10/span 1;"
+      data-full="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/match-striker-3.jpg" data-title="match striker" data-line="Unglazed grit on the shoulder strikes the match." aria-label="match striker">
+      <img loading="lazy" src="https://danieldiazrn.github.io/perriann-redesign/assets/ceramics/match-striker-3.jpg" alt="match striker">
+      <span class="pda-tt">match striker</span>
+    </button>
+  </div>
+
+  <div class="pda-lb" id="pda-lb" role="dialog" aria-modal="true" aria-label="Piece detail">
+    <div class="pda-lb-bg" data-close></div>
+    <div class="pda-lb-card">
+      <button class="pda-lb-close" data-close aria-label="Close">&times;</button>
+      <img id="pda-lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+      <div class="pda-lb-side">
+        <span class="pda-k">One of one</span>
+        <h3 id="pda-lb-title"></h3>
+        <div class="pda-rule"></div>
+        <p id="pda-lb-line"></p>
+        <div><a class="pda-lb-cta" id="pda-lb-cta"
+          href="mailto:perrianndiaz@outlook.com?subject=Ceramics%20commission%20inquiry">Commission Your Own Piece</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  if (window.__pdaCeramics) return; window.__pdaCeramics = true;
+  var lb=document.getElementById('pda-lb'),
+      img=document.getElementById('pda-lb-img'),
+      ttl=document.getElementById('pda-lb-title'),
+      lin=document.getElementById('pda-lb-line'),
+      cta=document.getElementById('pda-lb-cta');
+  function open(b){
+    img.src=b.getAttribute('data-full'); img.alt=b.getAttribute('data-title');
+    ttl.textContent=b.getAttribute('data-title'); lin.textContent=b.getAttribute('data-line');
+    lb.classList.add('pda-open'); document.body.style.overflow='hidden';
+  }
+  function close(){ lb.classList.remove('pda-open'); document.body.style.overflow=''; }
+  document.querySelectorAll('.pda-cw .pda-tile').forEach(function(b){
+    b.addEventListener('click',function(){open(b);});
+  });
+  lb.querySelectorAll('[data-close]').forEach(function(x){x.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  function glide(toY){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){window.scrollTo(0,toY);return;}
+    var startY=window.scrollY,d=toY-startY,t0=performance.now(),ms=800;
+    function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    (function frame(now){var p=Math.min((now-t0)/ms,1);
+      window.scrollTo(0,startY+d*ease(p));if(p<1)requestAnimationFrame(frame);})(t0);
+    setTimeout(function(){if(Math.abs(window.scrollY-toY)>Math.abs(d)*.8)window.scrollTo(0,toY);},280);
+  }
+  cta.addEventListener('click',function(e){
+    var target=document.getElementById('pda-commission');
+    if(target){ e.preventDefault(); close();
+      glide(target.getBoundingClientRect().top+window.scrollY-40); }
+  });
+})();
+</script>
